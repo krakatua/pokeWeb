@@ -21,14 +21,14 @@ const Navbar = () => {
       >
         <Link
           to="/"
-          className="flex items-center gap-2 hover:scale-110 transition-all animate-fade-right"
+          className="flex items-center gap-2 animate-fade-right "
           onClick={() => {
             setActive('');
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-20 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor pointer flex">
+          <img src={logo} alt="logo" className="w-20 h-9 object-contain hover:scale-110 transition-all"  />
+          <p className="text-white text-[18px] font-bold cursor pointer flex hover:scale-110 transition-all">
             Pokemon |&nbsp; <span className="sm:block hidden">Wiki</span>
           </p>
         </Link>
