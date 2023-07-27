@@ -27,7 +27,7 @@ const Pikachu = ({isMobile}) => {
       <primitive
         object={pikachu.scene}
         scale={isMobile ? 0.1 : 0.1}
-        position={isMobile ? [0, -4, 0]: [0, -3.25, 0]}
+        position={isMobile ? [0, -4, 0]: [0, -4.25, 0]}
         rotation={[-0.01, 1.25, -0.02]}
       />
     </mesh>

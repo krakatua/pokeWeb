@@ -1,17 +1,15 @@
+
 export const navLinks = [
   {
-    id: "about",
-    title: "About",
+    id: "home",
+    title: "Home",
   },
   {
-    id: "lista",
-    title: "Lista",
-  },
-  {
-    id: "contact",
-    title: "Contact",
+    id: "pokedex",
+    title: "Pokedex",
   },
 ];
+
 
 const styles = {
   paddingX: "sm:px-16 px-6",
@@ -28,6 +26,7 @@ const styles = {
   sectionSubText:
     "sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider",
 };
+
 
 export const pokemon = new Array(
   "Bulbasaur",

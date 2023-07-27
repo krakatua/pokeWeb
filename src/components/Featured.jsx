@@ -1,70 +1,111 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { motion } from "framer-motion";
-import { fadeIn } from "../utils/motion";
+import { fadeIn, textVariant } from "../utils/motion";
 import { styles } from "../constants";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { pokemon } from "../constants";
+import {Swiper as SwiperComponent, SwiperSlide} from "swiper/react";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination, Autoplay } from 'swiper/modules';
+import Card from "./Card";
+import { Tilt } from "react-tilt";
+import SectionWrapper from '../hoc/SectionWrapper'
 
+
+// eslint-disable-next-line react-refresh/only-export-components
 const Featured = ({ index }) => {
   const [pokemons, setPokemons] = useState([]);
   
 
-  function lowerCase(pokemon) {
-    return pokemon.map(
-      (pokemon) => pokemon.charAt(0).toLowerCase() + pokemon.slice(1)
-    );
-  }
-  const pokeLower = lowerCase(pokemon);
-  function getArr(pokeLower, count) {
-    return pokeLower.sort(() => Math.random() - 0.5).slice(0, count);
-  }
-  const pokeRandom = getArr(pokeLower, 10);
+  const getPokemons = async () => {
+    await axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=10&offset=64")
+      .then(({ data }) => setPokemons(data.results))
+      .catch((error) => console.error(error));
+  };
 
-  async function pokeData() {
-    const poke = []
-    for (const name of pokeRandom) {
-      try {
-        const { data } = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${name}`
-        );
-            poke.push(data)
-        
-      } catch (error) {
-        console.error(`Error for ${name}`);
-      }
-    }
-
-    setPokemons(poke);
-  }
   useEffect(() => {
-    setPokemons([]);
-    pokeData();
+    getPokemons();
   }, []);
-  
-  console.log(pokemons)
 
-  
-  
+  console.log(pokemons);
 
   return (
     <>
       <motion.div
+    variants={textVariant()}
+    >
+      
+      <h2 className={`${styles.sectionHeadText} text-center`}>
+        Start checking out these pokemons
+      </h2>
+    </motion.div>
+      <motion.div
         variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-        className={`${styles.paddingX} m-auto w-fit  p-[1px] rounded-[20px]`}
+        className={`${styles.paddingX} m-auto p-[1px] rounded-[20px]
+        flex flex-col items-center`}
       >
-        <Carousel margin={10} nav
-        infiniteLoop={true}
-        thumbWidth={100}
-        className="w-full">{
-            pokemons.map((poke) => (
-                <img key={poke.id} src={poke.sprites.front_default}/>
-            ))
-            }</Carousel>
+        <div className="container">
+        <div className="swiperContainer">
+          <SwiperComponent
+            modules={[Pagination, Autoplay]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false
+            }}
+            pagination={{
+              el: ".pagination",
+              clickable: true,
+            }}
+            slidesPerView={4}
+            breakpoints={{
+              "@0.00": {
+                slidesPerView: 1,
+                spaceBetween: 25,
+              },
+              "@0.50": {
+                slidesPerView: 1.25,
+                spaceBetween: 25,
+              },
+              "@1.00": {
+                slidesPerView: 2,
+                spaceBetween: 25,
+              },
+              "@1.25": {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+              },
+              "@1.50": {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+              "@1.75": {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+            }}
+          >
+            {pokemons?.map((pokemon) => (
+              <SwiperSlide key={pokemon?.url}>
+                <Tilt className="xs:w-[350px]">
+                <Card url={pokemon?.url} />
+                </Tilt>
+                
+              </SwiperSlide>
+            ))}
+          </SwiperComponent>
+        </div>
+        </div>
+        <button className={`w-fit rounded-md 
+        p-5 outline-none font-bold shadow-md shadow-primary 
+        bg-tertiary button_secondary hover:scale-105 transition-all
+        ${styles.sectionSubText}`}>Go to the pokedex!</button>
       </motion.div>
+      
     </>
   );
 };
 
-export default Featured;
+// eslint-disable-next-line react-refresh/only-export-components
+export default SectionWrapper(Featured, 'featured')

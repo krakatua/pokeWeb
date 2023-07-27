@@ -1,19 +1,21 @@
-import { BrowserRouter } from "react-router-dom";
+import {Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Featured from "./components/Featured";
+import Home from "./pages/Home";
+import Pokedex from "./Pokedex";
 
 const App = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+
   return (
-    <BrowserRouter>
-      <div className="bg-black relative z-0 bg-primary">
-        <div className="bg-her-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Header />
-        </div>
-        <Featured/>
-      </div>
-    </BrowserRouter>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route index element={<Home/>}/>
+        <Route path="pokedex" element={<Pokedex/>}/>
+      </Routes>
+    </Router>
   );
 };
 

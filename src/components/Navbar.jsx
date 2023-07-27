@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-black`}
+      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}
     >
       <div
         className="w-full flex justify-between items-center
@@ -33,17 +33,18 @@ const Navbar = () => {
           </p>
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-10 animate-fade-left">
-            {
-                navLinks.map((link) => (
-                    <li key={link.id} className={`${
-                        active === link.title
-                        ? 'text-white'
-                        : 'text-gray-200'
-                    } hover:text-white transition-all hover:scale-110 text-[18px] font-medium cursor-pointer`}>
-                        <a href={`#${link.id}`}>{link.title}</a>
+        <li className={`hover:text-white transition-all hover:scale-110 text-[18px] font-medium cursor-pointer`}>
+                      <Link
+                      to='/'>
+                      Home
+                        </Link>
                     </li>
-                ))
-            }
+                    <li className={`hover:text-white transition-all hover:scale-110 text-[18px] font-medium cursor-pointer`}>
+                      <Link
+                      to='/pokedex'>
+                      Pokedex
+                        </Link>
+                    </li>
 
         </ul>
 
