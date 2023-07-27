@@ -9,7 +9,7 @@ const Pikachu = ({isMobile}) => {
 
   return (
     <mesh>
-      <hemisphereLight intensity={0.15} groundColor="black" />
+      <hemisphereLight intensity={0.15} groundColor="yellow" />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
@@ -27,7 +27,7 @@ const Pikachu = ({isMobile}) => {
       <primitive
         object={pikachu.scene}
         scale={isMobile ? 0.1 : 0.1}
-        position={isMobile ? [-4, -4, -1]: [0, -3.25, -1.5]}
+        position={isMobile ? [0, -4, 0]: [0, -3.25, 0]}
         rotation={[-0.01, 1.25, -0.02]}
       />
     </mesh>

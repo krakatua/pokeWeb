@@ -13,7 +13,7 @@ const Header = () => {
             </div>
             <div >
                 <h1 className={`${styles.heroHeadText}`}>
-                    Welcome to the Greatest Poke Wiki <span className="text-[#f4dc26]"> Say hi! to pikachu</span>
+                    Welcome to the Greatest Poke Wiki <br /><span className={`${styles.heroSubText}`}> Say hi! to pikachu</span>
                 </h1>
 
             </div>

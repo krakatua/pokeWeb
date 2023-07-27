@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
+import Featured from "./components/Featured";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
           <Navbar />
           <Header />
         </div>
+        <Featured/>
       </div>
     </BrowserRouter>
   );

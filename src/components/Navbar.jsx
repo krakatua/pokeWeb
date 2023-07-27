@@ -29,7 +29,7 @@ const Navbar = () => {
         >
           <img src={logo} alt="logo" className="w-20 h-9 object-contain hover:scale-110 transition-all"  />
           <p className="text-white text-[18px] font-bold cursor pointer flex hover:scale-110 transition-all">
-            Pokemon |&nbsp; <span className="sm:block hidden">Wiki</span>
+            Pokemon &nbsp; <span className="sm:block hidden">| Wiki</span>
           </p>
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-10 animate-fade-left">
