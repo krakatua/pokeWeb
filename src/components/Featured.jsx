@@ -11,6 +11,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import Card from "./Card";
 import { Tilt } from "react-tilt";
 import SectionWrapper from '../hoc/SectionWrapper'
+import { Link } from "react-router-dom";
 
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -37,7 +38,7 @@ const Featured = ({ index }) => {
     variants={textVariant()}
     >
       
-      <h2 className={`${styles.sectionHeadText} text-center`}>
+      <h2 className={`${styles.sectionHeadText} text-center mb-10`}>
         Start checking out these pokemons
       </h2>
     </motion.div>
@@ -97,10 +98,12 @@ const Featured = ({ index }) => {
           </SwiperComponent>
         </div>
         </div>
+        <Link to='/pokedex'>
         <button className={`w-fit rounded-md 
         p-5 outline-none font-bold shadow-md shadow-primary 
         bg-tertiary button_secondary hover:scale-105 transition-all
         ${styles.sectionSubText}`}>Go to the pokedex!</button>
+        </Link>
       </motion.div>
       
     </>
