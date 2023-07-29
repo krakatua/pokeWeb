@@ -27,6 +27,28 @@ const styles = {
     "sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider",
 };
 
+export const pokeType = [
+  { name: 'normal', color: '9099A1' },
+  { name: 'fighting', color: 'C6416A' },
+  { name: 'flying', color: '88A6DA' },
+  { name: 'poison', color: 'AC6CC9' },
+  { name: 'ground', color: 'D47A42' },
+  { name: 'rock', color: 'C5B688' },
+  { name: 'bug', color: '00FF19' },
+  { name: 'ghost', color: '4F68A7' },
+  { name: 'steel', color: '588CA5' },
+  { name: 'fire', color: 'F89A51' },
+  { name: 'water', color: '004DC0' },
+  { name: 'grass', color: '61BC5C' },
+  { name: 'electric', color: 'F5D440' },
+  { name: 'psychic', color: 'ED7980' },
+  { name: 'ice', color: '76D3C6' },
+  { name: 'dragon', color: '0872C5' },
+  { name: 'dark', color: '5A5365' },
+  { name: 'fairy', color: 'F493EF' },
+];
+
+
 
 export const pokemon = new Array(
   "Bulbasaur",

@@ -21,7 +21,7 @@ const Featured = ({ index }) => {
 
   const getPokemons = async () => {
     await axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=10&offset=64")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=64")
       .then(({ data }) => setPokemons(data.results))
       .catch((error) => console.error(error));
   };
@@ -30,7 +30,6 @@ const Featured = ({ index }) => {
     getPokemons();
   }, []);
 
-  console.log(pokemons);
 
   return (
     <>
@@ -87,7 +86,7 @@ const Featured = ({ index }) => {
               },
             }}
           >
-            {pokemons?.map((pokemon) => (
+            {pokemons?.slice(0, 10).map((pokemon) => (
               <SwiperSlide key={pokemon?.url}>
                 <Tilt className="xs:w-[350px]">
                 <Card url={pokemon?.url} />
@@ -98,12 +97,7 @@ const Featured = ({ index }) => {
           </SwiperComponent>
         </div>
         </div>
-        <Link to='/pokedex'>
-        <button className={`w-fit rounded-md 
-        p-5 outline-none font-bold shadow-md shadow-primary 
-        bg-tertiary button_secondary hover:scale-105 transition-all
-        ${styles.sectionSubText}`}>Go to the pokedex!</button>
-        </Link>
+        
       </motion.div>
       
     </>

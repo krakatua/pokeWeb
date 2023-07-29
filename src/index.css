@@ -167,6 +167,7 @@
   }
 
 
+
   .card {
     display: flex;
     flex-direction: column;
@@ -223,8 +224,16 @@
     transform: scale(1.1);
   }
 
+  .bg-tertiary {
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 16 48 / var(--tw-bg-opacity));
+  }
   .button_secondary {
     --tw-bg-opacity: 1;
     background-color: rgb(21 16 48 / var(--tw-bg-opacity));
+  }
+
+  .CardPoke {
+    @apply w-[100px] flex flex-col 
   }
   
