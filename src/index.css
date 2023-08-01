@@ -234,6 +234,6 @@
   }
 
   .CardPoke {
-    @apply w-[100px] flex flex-col 
+    @apply w-[200px] flex flex-col 
   }
   

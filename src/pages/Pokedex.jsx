@@ -95,7 +95,7 @@ const Pokedex = () => {
                   <option value="z-a">Z-A</option>
                 </select>
               </div>
-              <div className="border-2 flex flex-wrap gap-2 p-2">
+              <div className="border-2 flex flex-wrap justify-center items-center gap-2 p-2">
                 {listPokes?.slice(0, visible).map((pokemon) => (
                   <Tilt key={pokemon.name} className="xs:w-[350px]">
                     <Cardv2 url={pokemon?.url} />
