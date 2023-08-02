@@ -17,8 +17,16 @@ function Cardv2({url}) {
       getPokemon();
     }, []);
 
+    console.log(pokemon)
+
+    const colorVariants = {
+      blue: 'bg-blue-600 hover:bg-blue-500 text-white',
+      red: 'bg-red-500 hover:bg-red-400 text-white',
+      yellow: 'bg-yellow-300 hover:bg-yellow-400 text-black',
+    }
+
   return (
-    <Link to=''>
+    <Link to={`/pokemon/${pokemon?.name}`}>
     <div className="CardPoke">
       <img src={pokemon?.sprites?.other.home.front_default} alt={pokemon?.name}/>
       <h3 className={`text-gray-400 text-[12px]`}>#{pokemon?.id}</h3>
@@ -30,7 +38,7 @@ function Cardv2({url}) {
           return (
             <h4
             id='pokeType'
-            className={`bg-[#${typeColor}] text-md border-2`}
+            className={`bg-[${colorVariants[typeColor]}] text-md border-2 p-1`}
             key={slot}>
               {type?.name}
             </h4>

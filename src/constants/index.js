@@ -28,18 +28,18 @@ const styles = {
 };
 
 export const pokeType = [
-  { name: 'normal', color: '9099A1' },
-  { name: 'fighting', color: 'C6416A' },
-  { name: 'flying', color: '88A6DA' },
-  { name: 'poison', color: 'AC6CC9' },
-  { name: 'ground', color: 'D47A42' },
+  { name: 'normal', color: 'gray' },
+  { name: 'fighting', color: 'orange' },
+  { name: 'flying', color: 'blue' },
+  { name: 'poison', color: 'purple' },
+  { name: 'ground', color: 'brown' },
   { name: 'rock', color: 'C5B688' },
   { name: 'bug', color: '00FF19' },
   { name: 'ghost', color: '4F68A7' },
   { name: 'steel', color: '588CA5' },
-  { name: 'fire', color: 'F89A51' },
+  { name: 'fire', color: 'red' },
   { name: 'water', color: '004DC0' },
-  { name: 'grass', color: '61BC5C' },
+  { name: 'grass', color: 'green' },
   { name: 'electric', color: 'F5D440' },
   { name: 'psychic', color: 'ED7980' },
   { name: 'ice', color: '76D3C6' },
@@ -47,6 +47,8 @@ export const pokeType = [
   { name: 'dark', color: '5A5365' },
   { name: 'fairy', color: 'F493EF' },
 ];
+
+
 
 
 
