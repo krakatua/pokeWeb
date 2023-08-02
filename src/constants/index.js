@@ -49,6 +49,16 @@ export const pokeType = [
 ];
 
 
+export const nameStat = [
+  "HP",
+  "Attack",
+  "Defense",
+  "Special Attack",
+  "Special Defense",
+  "Speed",
+]
+
+
 
 
 
