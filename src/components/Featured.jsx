@@ -89,7 +89,9 @@ const Featured = ({ index }) => {
             {pokemons?.slice(0, 10).map((pokemon) => (
               <SwiperSlide key={pokemon?.url}>
                 <Tilt className="xs:w-[350px]">
+                  <Link to={`/pokemon/${pokemon.name}`}>
                 <Card url={pokemon?.url} />
+                </Link>
                 </Tilt>
                 
               </SwiperSlide>

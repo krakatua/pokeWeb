@@ -15,7 +15,7 @@ const Pokedex = () => {
   const [totalItem, setTotalItem] = useState(0);
 
   const showMoreItems = () => {
-    setVisible((preVal) => preVal + 4);
+    setVisible((preVal) => preVal + 8);
   };
   const handleInputChange = (event) => {
     setSearchPoke(event.target.value);
@@ -46,7 +46,7 @@ const Pokedex = () => {
 
   function filteredItems(filter) {
     if (filter === 'lowestNum') {
-      return listPokes.sort((a, b) => a.id - b.id);
+      highestnum = sorted()
     }
     if (filter === 'highestNum') {
       return listPokes.sort((a, b) => b.id - a.id);

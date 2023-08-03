@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+import { Bar} from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -37,18 +37,14 @@ const LinesChart = ({ pokestats, pokemon }) => {
         console.error("El argumento debe ser un array no vacío.");
         return [];
       }
-
       // Utilizamos 'map' para obtener un nuevo array con solo los valores de 'base_stat'
       const baseStats = array.map((stat) => stat.base_stat);
-
       return baseStats;
     }
     const statsArray = obtenerBaseStats(pokestats);
     setBaseStatsArray(statsArray);
   }, [pokestats]);
-
-  console.log(baseStatsArray)
-
+  
   const statData = {
     labels: nameStat || [],
     datasets: [
@@ -57,7 +53,6 @@ const LinesChart = ({ pokestats, pokemon }) => {
         data: baseStatsArray || [],
         backgroundColor: `rgba(255,0,0,1)`,
         borderColor: "black",
-        borderWidth: 1,
         hoverBackgroundColor: `rgba(255,0,0,1)`,
         hoverBorderColor: "black",
       },
@@ -76,17 +71,21 @@ const LinesChart = ({ pokestats, pokemon }) => {
     },
     scales: {
         y: {
-            min: 0,
-            max: 100
+            display:false
         },
         x: {
-            ticks: {color: '#fff'}
+            ticks: {color: '#fff'},
+            grid: {
+                display: false,
+
+            },
+
         }
     }
 
   };
 
-  return <Line data={statData} options={myopts} ref={ref} />;
+  return <Bar data={statData} options={myopts} ref={ref} />;
 };
 
 LinesChart.propTypes = {
