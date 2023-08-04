@@ -11,6 +11,7 @@ const Center = ({isMobile}) => {
     <mesh>
       <hemisphereLight intensity={0.15} groundColor="yellow" />
       <spotLight
+      
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
@@ -65,7 +66,7 @@ const CenterCanvas = () => {
     gl={{preserveDrawingBuffer:true}}>
       <Suspense fallback={<Loader/>}>
     <OrbitControls 
-    
+    autoRotate
     enableZoom={false}
     maxPolarAngle={Math.PI / 2}
     minPolarAngle={Math.PI / 2}/>

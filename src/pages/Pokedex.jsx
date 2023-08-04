@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cardv2 from "../components/Cardv2";
 import { Tilt } from "react-tilt";
+import has from "lodash";
 
 const Pokedex = () => {
   const [listPokes, setListPokes] = useState([]);
@@ -22,7 +23,7 @@ const Pokedex = () => {
   };
   const getPokemons = async () => {
     await axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=1000000&offset=0")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=5000&offset=0")
       .then(({ data }) => setListPokes(data.results))
       .catch((error) => console.error(error));
   };
@@ -33,7 +34,6 @@ const Pokedex = () => {
     );
     setTotalItem(data);
   }
-  console.log(totalItem);
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearch();
@@ -45,65 +45,73 @@ const Pokedex = () => {
   }, []);
 
   function filteredItems(filter) {
-    if (filter === 'lowestNum') {
-      highestnum = sorted()
-    }
-    if (filter === 'highestNum') {
-      return listPokes.sort((a, b) => b.id - a.id);
-    }
-    if (filter === 'a-z') {
-      return listPokes.sort((a, b) => a.name.localeCompare(b.name));
-    }
-    if (filter === 'z-a') {
-      return listPokes.sort((a, b) => b.name.localeCompare(a.name));
+    if (filter === "highestNum") {
+      let newArrPoke = has.orderBy(listPokes, ["name", "url"], ["desc", "asc"]);
+      setListPokes(newArrPoke);
+    } else if (filter === "lowestNum") {
+      let newArrPoke = has.orderBy(listPokes, ["name", "url"], ["asc", "desc"]);
+      setListPokes(newArrPoke);
     }
   }
 
-  console.log(filteredItems())
+  console.log(listPokes)
 
   return (
-    <section className="relative w-full h-screen mx-auto">
+    <section className="relative w-full h-fit mx-auto">
       <motion.div>
         <div
           className={`${styles.padding} bg-tertiary w-full relative h-fit rounded-lg`}
         >
-          <h2 className={`${styles.sectionSubText} text-center`}>
+          <h2 className={`${styles.sectionHeadText} text-center`}>
             Start Looking for your pokemon!
           </h2>
+          <CenterCanvas />
           <div className={``}>
             <div className="flex flex-col items-center">
-              <div className="">
-                <div>
-                  <input
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyPress}
-                    type="text"
-                  />
-                  <AiOutlineSearch />
+              <div className="w-full flex justify-around items-center">
+                <div className="flex">
+                  <div className="form__group field">
+                    <input
+                      required=""
+                      placeholder="Name"
+                      className="form__field"
+                      type="input"
+                      onChange={handleInputChange}
+                      onKeyDown={handleKeyPress}
+                    />
+                    <label className="form__label" htmlFor="name">
+                      Ex: pikachu
+                    </label>
+                  </div>
                 </div>
                 <select
-                  id="filter-items"
+                  id="orderSelect"
                   defaultValue={""}
-                  onChange={(event) => filteredItems(event)}
+                  onChange={(event) => filteredItems(event.target.value)}
                 >
                   <option value="" disabled>
                     Default
                   </option>
-                  <option value="lowestNum">Lowest Number</option>
-                  <option value="highestNum">Highest Number</option>
-                  <option value="a-z">A-Z</option>
-                  <option value="z-a">Z-A</option>
+                  <option value="lowestNum">A - Z</option>
+                  <option value="highestNum">Z - A</option>
                 </select>
               </div>
-              <div className="border-2 flex flex-wrap justify-center items-center gap-2 p-2">
-                {listPokes?.slice(0, visible).map((pokemon) => (
-                  <Tilt key={pokemon.name} className="xs:w-[350px]">
-                    <Cardv2 url={pokemon?.url} />
+              <div className="flex flex-wrap justify-center items-center gap-2 p-2 mb-10 mt-10">
+                {totalItem ? (
+                  <Tilt className="xs:w-[350px]">
+                    <Cardv2 totalItem={totalItem} />
                   </Tilt>
-                ))}
+                ) : (
+                  listPokes?.slice(0, visible).map((pokemon) => (
+                    <Tilt key={pokemon.name} className="xs:w-[350px]">
+                      <Cardv2 url={pokemon?.url} />
+                    </Tilt>
+                  ))
+                )}
               </div>
+
               <button
-                className={`text-center w-fit p-2 bg-blue-900 button_secondary `}
+                className={`${totalItem ? "hidden" : "block"} btn`}
                 onClick={() => showMoreItems()}
               >
                 Cargar Mas
@@ -112,7 +120,6 @@ const Pokedex = () => {
           </div>
         </div>
       </motion.div>
-      <CenterCanvas />
     </section>
   );
 };
