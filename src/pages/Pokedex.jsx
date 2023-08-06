@@ -54,8 +54,6 @@ const Pokedex = () => {
     }
   }
 
-  console.log(listPokes)
-
   return (
     <section className="relative w-full h-fit mx-auto">
       <motion.div>

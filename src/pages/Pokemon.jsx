@@ -6,18 +6,21 @@ import { styles } from '../constants';
 import LinesChart from '../components/LinesChart';
 import { Tilt } from 'react-tilt';
 import SectionWrapper from '../hoc/SectionWrapper';
+import PokeEvolve from '../components/PokeEvolve';
 
 function Pokemon() {
   const {id} = useParams();
   const [poke, setPoke] = useState({})
   const [pokestats, setPokestats] = useState([]);
+  const [species, setSpecies] = useState('')
   
 
   async function getPokeData () {
     const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
     setPoke(data)
-
+    setSpecies(data?.species?.url)
   }
+
   useEffect(() => {
     getPokeData();
   }, [])
@@ -25,7 +28,6 @@ function Pokemon() {
     // Cuando cambia 'poke', actualizamos 'pokestats' con las estadísticas
     setPokestats(poke?.stats || []);
   }, [poke]);
-  console.log(poke)
   return (
     <section className='relative w-full h-screen mx-auto'>
       <motion.div
@@ -69,7 +71,7 @@ function Pokemon() {
                   </div>
                 </div>
               </div>
-
+                  <PokeEvolve species={species}/>
             </div>
           </div>
         </div>
