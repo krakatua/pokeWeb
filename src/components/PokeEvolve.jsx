@@ -6,8 +6,10 @@ import CirclePoke from './UI/CirclePoke';
 const PokeEvolve = ({species}) => {
 
     const [evolveChain, setEvolveChain] = useState();
+    console.log(species)
 
     async function getEvolves() {
+      
        try {
         const { data } = await axios.get(species);
         setEvolveChain(data?.evolution_chain?.url);
@@ -17,6 +19,7 @@ const PokeEvolve = ({species}) => {
         console.error('Error en la solicitud:', error);
       }
     }
+    console.log(evolveChain)
     
       useEffect(() => {
         // Verificar si el valor de species está almacenado en localStorage

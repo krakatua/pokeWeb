@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import axios from 'axios';
+import logo from '../../assets/025.png'
 
 const CirclePoke = ({url}) => {
 
@@ -15,11 +16,30 @@ async function getLinkTree() {
 useEffect(() => {
     getLinkTree();
   }, []);
+  console.log(linkEvo)
 
   
 
   return (
-    <div>{url}</div>
+    <div className='flex flex-col'>
+      <h1>Pokemon Evolution Tree</h1>
+      <div className='flex'>
+
+      
+    <div className='w-[33%] h-[150px] border-4 border-gray-500 bg-gray-900 rounded-[50%] m-2'>
+      <img src={logo}/> 
+
+    </div>
+    <div className='w-[33%] h-[150px] border-4 border-gray-500 bg-gray-900 rounded-[50%] m-2'>
+      <img src={logo}/> 
+
+    </div>
+    <div className='w-[33%] h-[150px] border-4 border-gray-500 bg-gray-900 rounded-[50%] m-2'>
+      <img src={logo}/> 
+
+    </div>
+    </div>
+    </div>
   )
 }
 
@@ -27,7 +47,7 @@ useEffect(() => {
 
 
 CirclePoke.propTypes = {
-    species: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   };
 
 export default CirclePoke
