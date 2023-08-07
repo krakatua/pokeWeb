@@ -1,5 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+import pokeData from '../redux/reducers/getInitialPokemonData'
 
 export const store = configureStore ({
-    reducer: {},
+    reducer: {
+        app: pokeData
+    },
 })
+
+

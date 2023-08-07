@@ -24,7 +24,7 @@ useEffect(() => {
     <div className='flex flex-col'>
       <h1>Pokemon Evolution Tree</h1>
       <div className='flex'>
-
+  
       
     <div className='w-[33%] h-[150px] border-4 border-gray-500 bg-gray-900 rounded-[50%] m-2'>
       <img src={logo}/> 

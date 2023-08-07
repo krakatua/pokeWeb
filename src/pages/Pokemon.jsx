@@ -7,27 +7,55 @@ import LinesChart from '../components/LinesChart';
 import { Tilt } from 'react-tilt';
 import SectionWrapper from '../hoc/SectionWrapper';
 import PokeEvolve from '../components/PokeEvolve';
+import { pokemonTypes } from '../constants/pokemonTypes';
 
 function Pokemon() {
   const {id} = useParams();
   const [poke, setPoke] = useState({})
   const [pokestats, setPokestats] = useState([]);
-  const [species, setSpecies] = useState('')
-  
+  const [species, setSpecies] = useState('');
+  const [pokeType, setPokeType] = useState([])
+  let types = []
 
   async function getPokeData () {
     const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
     setPoke(data)
     setSpecies(data?.species?.url)
   }
+  console.log(poke)
+  function pokeTypes() {
+    let elements = document.getElementsByClassName('pokeType')
+    
+    for (let i = 0; i < elements.length; i++) {
+      types.push(elements[i].innerHTML)
+    }
+    console.log(types)
+  }
+
+  function compareTypes () {
+    const newTypeObjs = []
+    for (let type of types) {
+      const typeObj = pokemonTypes[type];
+      newTypeObjs.push({ ...typeObj, id: type});
+  }
+  setPokeType(newTypeObjs)
+}
+console.log(pokeType)
 
   useEffect(() => {
     getPokeData();
+    pokeTypes();
+    compareTypes()
   }, [])
   useEffect(() => {
     // Cuando cambia 'poke', actualizamos 'pokestats' con las estadísticas
     setPokestats(poke?.stats || []);
   }, [poke]);
+
+  
+
+
+
   return (
     <section className='relative w-full h-screen mx-auto'>
       <motion.div
@@ -72,6 +100,28 @@ function Pokemon() {
                 </div>
               </div>
                   <PokeEvolve species={species}/>
+                  {
+                    poke?.types?.map((ele) => (
+                    
+                    <div key={ele.id}>
+                      <h1 className='pokeType'>{ele.type.name}</h1>
+                      {
+                        pokeType.map((ele) => (
+                          <div key={ele.id}>
+                          <img className='w-[50px]' src={ele.image} slot={ele.id}/>
+                          <ul>
+                            <li>Resistence: {ele.resistance.join(', ')}</li>
+                            <li>Strength: {ele.strength.join(', ')} </li>
+                            <li>Vulnerable: {ele.vulnerable.join(', ')}</li>
+                            <li>Weakness: {ele.weakness.join(', ')}</li>
+                          </ul>
+                          </div>
+                        ))
+                      }
+                    </div>
+                    
+                    ))
+                  }
             </div>
           </div>
         </div>

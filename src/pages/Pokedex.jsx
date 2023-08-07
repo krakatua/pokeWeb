@@ -1,19 +1,21 @@
 import { motion } from "framer-motion";
 import CenterCanvas from "../canvas/Center";
 import SectionWrapper from "../hoc/SectionWrapper";
-import { AiOutlineSearch } from "react-icons/ai";
 import { styles } from "../constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cardv2 from "../components/Cardv2";
 import { Tilt } from "react-tilt";
 import has from "lodash";
+import {  useDispatch, useSelector } from "react-redux";
+import { getInitialPokemonData } from "../redux/reducers/getInitialPokemonData";
 
-const Pokedex = () => {
+const Pokedex = () =>  {
   const [listPokes, setListPokes] = useState([]);
   const [searchPoke, setSearchPoke] = useState("");
   const [visible, setVisible] = useState(12);
   const [totalItem, setTotalItem] = useState(0);
+  const dispatch = useDispatch();
 
   const showMoreItems = () => {
     setVisible((preVal) => preVal + 8);
@@ -27,6 +29,15 @@ const Pokedex = () => {
       .then(({ data }) => setListPokes(data.results))
       .catch((error) => console.error(error));
   };
+
+  const data = useSelector((state) => {
+    console.log('state...', state.app);
+    return state.app
+  })
+
+
+
+  
 
   async function handleSearch() {
     const { data } = await axios.get(
@@ -42,6 +53,7 @@ const Pokedex = () => {
 
   useEffect(() => {
     getPokemons();
+    dispatch(getInitialPokemonData());
   }, []);
 
   function filteredItems(filter) {
@@ -60,7 +72,7 @@ const Pokedex = () => {
         <div
           className={`${styles.padding} bg-tertiary w-full relative h-fit rounded-lg`}
         >
-          <h2 className={`${styles.sectionHeadText} text-center`}>
+                    <h2 className={`${styles.sectionHeadText} text-center`}>
             Start Looking for your pokemon!
           </h2>
           <CenterCanvas />
@@ -100,12 +112,13 @@ const Pokedex = () => {
                     <Cardv2 totalItem={totalItem} />
                   </Tilt>
                 ) : (
-                  listPokes?.slice(0, visible).map((pokemon) => (
+                  data?.pokeList.slice(0, visible).map((pokemon) => (
                     <Tilt key={pokemon.name} className="xs:w-[350px]">
                       <Cardv2 url={pokemon?.url} />
                     </Tilt>
                   ))
                 )}
+                
               </div>
 
               <button
