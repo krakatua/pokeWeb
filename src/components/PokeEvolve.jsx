@@ -1,59 +1,35 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from "prop-types";
 import CirclePoke from './UI/CirclePoke';
+import { pokemonsEvoChain } from '../constants';
+import logo from './../assets/025.png'
 
-const PokeEvolve = ({species}) => {
-
-    const [evolveChain, setEvolveChain] = useState();
-    console.log(species)
-
-    async function getEvolves() {
-      
-       try {
-        const { data } = await axios.get(species);
-        setEvolveChain(data?.evolution_chain?.url);
-    } 
-    catch (error) {
-        // Manejar el error de alguna forma, como mostrar un mensaje de error o registrar el error
-        console.error('Error en la solicitud:', error);
-      }
+const PokeEvolve = ({id}) => {
+    const [evolveTree, setEvolveTree] = useState({})
+    async function getEvolveTree() {
+      const {data} = await axios.get(id)
+      setEvolveTree(data);
     }
-    console.log(evolveChain)
-    
-      useEffect(() => {
-        // Verificar si el valor de species está almacenado en localStorage
-        const storedSpecies = localStorage.getItem('species');
-    
-        if (storedSpecies) {
-          // Si hay un valor almacenado, utilizarlo en lugar de la prop species
-          getEvolves(storedSpecies);
-        } else {
-          // Si no hay un valor almacenado, utilizar la prop species y guardarlo en localStorage
-          getEvolves(species);
-          localStorage.setItem('species', species);
-        }
-      }, []);
-      console.log(evolveChain)
+    useEffect(() => {
+      getEvolveTree();
+    }, [id])
+    console.log(evolveTree)
 
-     
-      
+    const getSpecies = () => {
 
-      
-
-  
-
-
+    }
 
   return (
     <div>
-        <CirclePoke url={evolveChain}/>
+      
+        <CirclePoke  url={evolveTree?.evolution_chain?.url}/>
     </div>
   )
 }
 
 PokeEvolve.propTypes = {
-    species: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   };
 
 export default PokeEvolve

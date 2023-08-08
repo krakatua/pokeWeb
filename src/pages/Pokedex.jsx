@@ -23,22 +23,9 @@ const Pokedex = () =>  {
   const handleInputChange = (event) => {
     setSearchPoke(event.target.value);
   };
-  const getPokemons = async () => {
-    await axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=5000&offset=0")
-      .then(({ data }) => setListPokes(data.results))
-      .catch((error) => console.error(error));
-  };
-
   const data = useSelector((state) => {
-    console.log('state...', state.app);
-    return state.app
+   return state.app
   })
-
-
-
-  
-
   async function handleSearch() {
     const { data } = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${searchPoke}`
@@ -51,17 +38,30 @@ const Pokedex = () =>  {
     }
   };
 
+  const getList = () => {
+    return setListPokes(data?.pokeList)
+  }
+
+
+
   useEffect(() => {
-    getPokemons();
     dispatch(getInitialPokemonData());
   }, []);
 
-  function filteredItems(filter) {
+  useEffect (() => {
+    getList();
+  }, [data])
+
+  
+
+  async function filteredItems(filter) {
+    
+
     if (filter === "highestNum") {
-      let newArrPoke = has.orderBy(listPokes, ["name", "url"], ["desc", "asc"]);
+      let newArrPoke = has.orderBy(data.pokeList, ["name", "url"], ["desc", "asc"]);
       setListPokes(newArrPoke);
     } else if (filter === "lowestNum") {
-      let newArrPoke = has.orderBy(listPokes, ["name", "url"], ["asc", "desc"]);
+      let newArrPoke = has.orderBy(data.pokeList, ["name", "url"], ["asc", "desc"]);
       setListPokes(newArrPoke);
     }
   }
@@ -112,7 +112,8 @@ const Pokedex = () =>  {
                     <Cardv2 totalItem={totalItem} />
                   </Tilt>
                 ) : (
-                  data?.pokeList.slice(0, visible).map((pokemon) => (
+                  
+                  listPokes?.slice(0, visible).map((pokemon) => (
                     <Tilt key={pokemon.name} className="xs:w-[350px]">
                       <Cardv2 url={pokemon?.url} />
                     </Tilt>

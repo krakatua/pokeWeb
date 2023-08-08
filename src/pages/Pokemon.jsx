@@ -15,7 +15,6 @@ function Pokemon() {
   const [pokestats, setPokestats] = useState([]);
   const [species, setSpecies] = useState('');
   const [pokeType, setPokeType] = useState([])
-  let types = []
 
   async function getPokeData () {
     const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -23,33 +22,31 @@ function Pokemon() {
     setSpecies(data?.species?.url)
   }
   console.log(poke)
-  function pokeTypes() {
-    let elements = document.getElementsByClassName('pokeType')
-    
-    for (let i = 0; i < elements.length; i++) {
-      types.push(elements[i].innerHTML)
-    }
-    console.log(types)
-  }
 
-  function compareTypes () {
-    const newTypeObjs = []
-    for (let type of types) {
+  function compareTypes (types) {
+    const newTypeObjs = types.map((type) => {
       const typeObj = pokemonTypes[type];
-      newTypeObjs.push({ ...typeObj, id: type});
-  }
-  setPokeType(newTypeObjs)
+      return { ...typeObj, id: type };
+    });
+    setPokeType(newTypeObjs);
 }
-console.log(pokeType)
 
   useEffect(() => {
-    getPokeData();
-    pokeTypes();
-    compareTypes()
-  }, [])
+    async function fetchData() {
+      await getPokeData();
+
+    }
+    fetchData()
+  }, [id])
   useEffect(() => {
     // Cuando cambia 'poke', actualizamos 'pokestats' con las estadísticas
     setPokestats(poke?.stats || []);
+  }, [poke]);
+  useEffect(() => {
+    if (poke?.types) {
+      const types = poke.types.map((type) => type.type.name);
+      compareTypes(types);
+    }
   }, [poke]);
 
   
@@ -99,7 +96,7 @@ console.log(pokeType)
                   </div>
                 </div>
               </div>
-                  <PokeEvolve species={species}/>
+                  <PokeEvolve id={species}/>
                   {
                     poke?.types?.map((ele) => (
                     
