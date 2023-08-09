@@ -9,8 +9,9 @@ import { Tilt } from "react-tilt";
 import has from "lodash";
 import {  useDispatch, useSelector } from "react-redux";
 import { getInitialPokemonData } from "../redux/reducers/getInitialPokemonData";
+import { fadeIn } from "../utils/motion";
 
-const Pokedex = () =>  {
+const Pokedex = ({index}) =>  {
   const [listPokes, setListPokes] = useState([]);
   const [searchPoke, setSearchPoke] = useState("");
   const [visible, setVisible] = useState(12);
@@ -67,19 +68,23 @@ const Pokedex = () =>  {
   }
 
   return (
-    <section className="relative w-full h-fit mx-auto">
-      <motion.div>
+    <section className="relative w-full mx-auto h-fit">
+      <motion.div
+      variants={fadeIn("right", "spring", index * 0.5, 0.75)}>
         <div
           className={`${styles.padding} bg-tertiary w-full relative h-fit rounded-lg`}
         >
-                    <h2 className={`${styles.sectionHeadText} text-center`}>
+          <div className="sm:flex items-center justify-center">
+                    <h2 className={`${styles.sectionSubText} text-center`}>
             Start Looking for your pokemon!
           </h2>
-          <CenterCanvas />
+          <CenterCanvas/>
+
+          </div>
           <div className={``}>
             <div className="flex flex-col items-center">
-              <div className="w-full flex justify-around items-center">
-                <div className="flex">
+              <div className="w-full sm:flex sm:justify-around sm:items-center">
+                <div className="flex mb-5">
                   <div className="form__group field">
                     <input
                       required=""
@@ -90,12 +95,13 @@ const Pokedex = () =>  {
                       onKeyDown={handleKeyPress}
                     />
                     <label className="form__label" htmlFor="name">
-                      Ex: pikachu
+                      Ex: pikachu or 2
                     </label>
                   </div>
                 </div>
                 <select
                   id="orderSelect"
+                  className="w-[250px]"
                   defaultValue={""}
                   onChange={(event) => filteredItems(event.target.value)}
                 >

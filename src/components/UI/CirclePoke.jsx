@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import axios from 'axios';
-import logo from '../../assets/025.png'
 import Circle from './Circle';
 
 const CirclePoke = ({url}) => {
@@ -26,17 +25,14 @@ useEffect(() => {
     }));
     const nonEmptyContentArray = contentArray.filter(item => item.name !== '');
     setPokeEvoArray(nonEmptyContentArray);
-  }, [linkEvo]);
-
-  console.log(pokeEvoArray)
-  
+  }, [linkEvo]);  
 
   
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col gap-1'>
       <h1>Pokemon Evolution Tree</h1>
-      <div className='flex flex-wrap'>
+      <div className='flex flex-wrap gap-1'>
       <h1 className='pokeEvo'>{linkEvo?.species?.name}</h1>
       <h1 className='pokeEvo'>{linkEvo?.evolves_to?.[0]?.species?.name}</h1>
       <h1 className='pokeEvo'>{linkEvo?.evolves_to?.[0]?.evolves_to?.[0]?.species?.name}</h1>

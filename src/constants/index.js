@@ -30,28 +30,28 @@ const styles = {
   sectionHeadText:
     "text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
   sectionSubText:
-    "sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider",
+    "sm:text-[32px] text-[14px] text-secondary uppercase tracking-wider",
 };
 
 export const pokeType = [
-  { name: 'normal', color: 'gray' },
+  { name: 'normal', color: 'graylight' },
   { name: 'fighting', color: 'orange' },
-  { name: 'flying', color: 'blue' },
+  { name: 'flying', color: 'lightblue' },
   { name: 'poison', color: 'purple' },
   { name: 'ground', color: 'brown' },
-  { name: 'rock', color: 'C5B688' },
-  { name: 'bug', color: '00FF19' },
-  { name: 'ghost', color: '4F68A7' },
-  { name: 'steel', color: '588CA5' },
+  { name: 'rock', color: 'goldenrod' },
+  { name: 'bug', color: 'green' },
+  { name: 'ghost', color: 'purple' },
+  { name: 'steel', color: 'slate' },
   { name: 'fire', color: 'red' },
-  { name: 'water', color: '004DC0' },
-  { name: 'grass', color: 'green' },
-  { name: 'electric', color: 'F5D440' },
-  { name: 'psychic', color: 'ED7980' },
-  { name: 'ice', color: '76D3C6' },
-  { name: 'dragon', color: '0872C5' },
-  { name: 'dark', color: '5A5365' },
-  { name: 'fairy', color: 'F493EF' },
+  { name: 'water', color: 'blue' },
+  { name: 'grass', color: 'lightgreen' },
+  { name: 'electric', color: 'yellow' },
+  { name: 'psychic', color: 'pink' },
+  { name: 'ice', color: 'cerulean' },
+  { name: 'dragon', color: 'lightRed' },
+  { name: 'dark', color: 'gray' },
+  { name: 'fairy', color: 'lightpink' },
 ];
 
 
@@ -63,6 +63,9 @@ export const nameStat = [
   "Special Defense",
   "Speed",
 ]
+
+
+
 
 
 

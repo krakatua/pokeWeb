@@ -28,7 +28,7 @@ const Center = ({isMobile}) => {
       <primitive
         object={center.scene}
         scale={isMobile ? 0.6 : 4}
-        position={isMobile ? [0, -4, 0]: [0, -2.25, 0]}
+        position={isMobile ? [0, -4, 0]: [0, -0.25, 0]}
         rotation={[-0.01, 1.25, -0.02]}
       />
     </mesh>
@@ -41,7 +41,7 @@ const CenterCanvas = () => {
   useEffect(() => {
 
     //Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
+    const mediaQuery = window.matchMedia('(max-width: 400px)');
 
     //Set the initial value of the 'isMobile' state variable
     setIsMobile(mediaQuery.matches);
@@ -60,6 +60,7 @@ const CenterCanvas = () => {
 
   return (
     <Canvas
+    className="max-w-[250px] md:block hidden"
     frameloop='demand'
     shadows
     camera={{position: [20, 3, 5], fov: 25}}

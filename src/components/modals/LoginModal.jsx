@@ -26,7 +26,7 @@ export default function LoginModal() {
 
             <button
                 className="bg-transparent border border-white text-white
-        w-[160px] rounded-full h-[40px] hover:bg-[#cbd2d7]
+        w-[160px] rounded-full h-[40px] hover:bg-[#cbd2d7] transition-all
         "
                 onClick={() => dispatch(openLoginModal())}
             >

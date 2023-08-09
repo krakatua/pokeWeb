@@ -1,9 +1,7 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
 import CirclePoke from './UI/CirclePoke';
-import { pokemonsEvoChain } from '../constants';
-import logo from './../assets/025.png'
 
 const PokeEvolve = ({id}) => {
     const [evolveTree, setEvolveTree] = useState({})
@@ -14,15 +12,9 @@ const PokeEvolve = ({id}) => {
     useEffect(() => {
       getEvolveTree();
     }, [id])
-    console.log(evolveTree)
-
-    const getSpecies = () => {
-
-    }
 
   return (
     <div>
-      
         <CirclePoke  url={evolveTree?.evolution_chain?.url}/>
     </div>
   )
