@@ -4,6 +4,8 @@ import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
 import { useState } from "react";
+import LoginModal from "./modals/LoginModal";
+import SignupModal from "./modals/SignUp";
 
 const Navbar = () => {
 
@@ -45,6 +47,13 @@ const Navbar = () => {
                       Pokedex
                         </Link>
                     </li>
+                    <li className={`hover:text-white transition-all hover:scale-110 text-[18px] font-medium cursor-pointer`}>
+                      <Link
+                      to='/MyList'>
+                      My List
+                        </Link>
+                    </li>
+                    
 
         </ul>
 

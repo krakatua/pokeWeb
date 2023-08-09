@@ -4,12 +4,12 @@ import Featured from "../components/Featured"
 const Home = () => {
 
 
-
   return (
     <>
     <div>
     <Header/>
     <Featured/>
+    
     </div>
     </>
     

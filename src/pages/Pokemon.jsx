@@ -8,6 +8,9 @@ import { Tilt } from 'react-tilt';
 import SectionWrapper from '../hoc/SectionWrapper';
 import PokeEvolve from '../components/PokeEvolve';
 import { pokemonTypes } from '../constants/pokemonTypes';
+import { addDoc } from 'firebase/firestore';
+import { pokemonListRef } from '../../firebase';
+import { useSelector } from 'react-redux';
 
 function Pokemon() {
   const {id} = useParams();
@@ -15,6 +18,8 @@ function Pokemon() {
   const [pokestats, setPokestats] = useState([]);
   const [species, setSpecies] = useState('');
   const [pokeType, setPokeType] = useState([])
+  const user = useSelector(state => state.user)
+  console.log(user)
 
   async function getPokeData () {
     const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -49,8 +54,23 @@ function Pokemon() {
     }
   }, [poke]);
 
-  
 
+console.log(poke)
+  
+async function addPokeList () {
+  await addDoc(
+    pokemonListRef, {
+      uid: poke?.id,
+      pokemon: {
+        id: poke?.id,
+        name: poke?.name,
+        pictures: poke?.sprites,
+        types: poke?.types
+      },
+      email: user.email,
+    }
+  )
+}
 
 
   return (
@@ -81,6 +101,9 @@ function Pokemon() {
             <div className='border w-full h-[650px]'>
               <div className=''>
                 <h2 className={`${styles.sectionSubText}`}>Details</h2>
+                <button
+                onClick={addPokeList}
+                className='border p-2'>Add to your list</button>
                 <div className={`${styles.padding} flex gap-2  bg-primary w-full p-1`}>
                   <div className='w-full'>
                     <p>Height: {poke?.height}</p>
