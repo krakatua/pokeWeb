@@ -8,6 +8,9 @@ import { closeSignupModal, openSignupModal } from "../../redux/reducers/modalSli
 import { auth } from "../../../firebase"
 import { setUser } from "../../redux/reducers/userSlice"
 import { useNavigate } from "react-router"
+import { object } from "prop-types"
+import { pfp } from "../../assets"
+
 
 export default function SignupModal() {
     const isOpen = useSelector(state => state.modals.signupModalOpen)
@@ -16,8 +19,20 @@ export default function SignupModal() {
 
     const [email, setEmail] = useState("")
     const [name, setName] = useState()
-    const [password, setPassword] = useState("")
-    const navigate = useNavigate()
+    const [password, setPassword] = useState("");
+    const [imgRandom, setImgRandom] = useState(null);
+
+  function getImg() {
+    const propiedades = Object.keys(pfp[0]);
+    const propsRandom =
+      propiedades[Math.floor(Math.random() * propiedades.length)];
+    setImgRandom(pfp[0][propsRandom]);
+
+    
+  }
+  useEffect(() => {
+    getImg()
+  }, [])
 
     async function handleSignUp() {
         const userCredentials = await createUserWithEmailAndPassword(
@@ -28,9 +43,9 @@ export default function SignupModal() {
 
         await updateProfile(auth.currentUser, {
             displayName: name,
-            photoURL:`./assets/profilePictures/pfp${Math.ceil(Math.random()*6)}.png`
+            photoURL: imgRandom
         });
-    };
+    }
 
     async function handleGuestSignIn() {
         await signInWithEmailAndPassword(auth, "guest77@gmail.com", "guest771234")

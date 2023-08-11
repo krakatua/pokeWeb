@@ -80,6 +80,8 @@ async function addPokeList () {
   
 }
 
+console.log(pokeType)
+
 
 
 
@@ -130,10 +132,15 @@ async function addPokeList () {
                 </div>
               </div>
                   <PokeEvolve id={species}/>
+                  <div className='flex flex-wrap gap-5'>
                       {
                         pokeType.map((ele) => (
                           <div key={ele.id}>
+                            <picture>
+
                           <img className='w-[50px]' src={ele.image} slot={ele.id}/>
+                          <label htmlFor="">{ele.id}</label>
+                            </picture>
                           <ul>
                             <li>Resistence: {ele.resistance.join(', ')}</li>
                             <li>Strength: {ele.strength.join(', ')} </li>
@@ -143,6 +150,7 @@ async function addPokeList () {
                           </div>
                         ))
                       }
+                      </div>
             </div>
           </div>
         </div>
