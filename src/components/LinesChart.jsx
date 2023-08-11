@@ -34,7 +34,6 @@ const LinesChart = ({ pokestats, pokemon }) => {
     function obtenerBaseStats(array) {
       // Comprobamos que el argumento sea un array y no esté vacío
       if (!Array.isArray(array) || array?.length === 0) {
-        console.error("El argumento debe ser un array no vacío.");
         return [];
       }
       // Utilizamos 'map' para obtener un nuevo array con solo los valores de 'base_stat'

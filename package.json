@@ -40,6 +40,7 @@
     "react-spinners": "^0.13.8",
     "react-tilt": "^1.0.2",
     "react-vertical-timeline-component": "^3.6.0",
+    "sonner": "^0.6.2",
     "sort-by": "^0.0.2",
     "swiper": "^10.0.4",
     "three": "^0.154.0"

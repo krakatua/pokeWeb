@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   signupModalOpen: false,
   loginModalOpen: false,
+  pokemonModalOpen: false,
   commentModalOpen: false,
   commentTweetDetails: {
     id: null,
@@ -18,6 +19,12 @@ const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
+    openPokemonModal: (state) => {
+      state.pokemonModalOpen = true
+    },
+    closePokemonModal: (state) => {
+      state.pokemonModalOpen = false
+    },
     openSignupModal: (state) => {
       state.signupModalOpen = true
     },
@@ -47,7 +54,7 @@ const modalSlice = createSlice({
   }
 });
 
-export const { openSignupModal, closeSignupModal, openLoginModal, closeLoginModal, openCommentModal,
+export const { openPokemonModal, closePokemonModal, openSignupModal, closeSignupModal, openLoginModal, closeLoginModal, openCommentModal,
   closeCommentModal, setCommentTweet } = modalSlice.actions
 
 export default modalSlice.reducer

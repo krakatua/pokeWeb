@@ -70,7 +70,7 @@ function Cardv2({ url, totalItem }) {
           </span>
         </div>
       ) : (
-        <div className="CardPoke">
+        <div className="CardPoke border rounded-tl-lg">
           <img
             src={totalItem?.sprites?.other.home.front_default}
             alt={totalItem?.name}
@@ -86,7 +86,7 @@ function Cardv2({ url, totalItem }) {
               return (
                 <h4
                   id="pokeType"
-                  className={`bg-[${colorVariants[typeColor]}] text-md border-2 p-1`}
+                  className={`${colorVariants[typeColor]} p-1 m-1 rounded-md text-[16px]`}
                   key={slot}
                 >
                   {type?.name}

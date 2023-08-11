@@ -32,6 +32,7 @@ const Pokedex = ({index}) =>  {
       `https://pokeapi.co/api/v2/pokemon/${searchPoke}`
     );
     setTotalItem(data);
+    
   }
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {

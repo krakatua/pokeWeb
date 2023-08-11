@@ -8,9 +8,11 @@ import { Tilt } from 'react-tilt';
 import SectionWrapper from '../hoc/SectionWrapper';
 import PokeEvolve from '../components/PokeEvolve';
 import { pokemonTypes } from '../constants/pokemonTypes';
-import { addDoc } from 'firebase/firestore';
-import { pokemonListRef } from '../../firebase';
-import { useSelector } from 'react-redux';
+import { addDoc, doc, setDoc } from 'firebase/firestore';
+import { db, pokemonListRef } from '../../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { openLoginModal } from '../redux/reducers/modalSlice';
+import { toast } from 'sonner';
 
 function Pokemon() {
   const {id} = useParams();
@@ -18,7 +20,8 @@ function Pokemon() {
   const [pokestats, setPokestats] = useState([]);
   const [species, setSpecies] = useState('');
   const [pokeType, setPokeType] = useState([])
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
   
 
   async function getPokeData () {
@@ -51,10 +54,16 @@ function Pokemon() {
       compareTypes(types);
     }
   }, [poke]);
-console.log(pokeType)
 
   
 async function addPokeList () {
+
+  if (!user) {
+    dispatch(openLoginModal())
+    return
+  }
+
+
   await addDoc(
     pokemonListRef, {
       uid: poke?.id,
@@ -67,7 +76,11 @@ async function addPokeList () {
       email: user.email,
     }
   )
+
+  
 }
+
+
 
 
   return (
