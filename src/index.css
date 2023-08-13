@@ -357,3 +357,11 @@
    .pokeEvo {
     @apply hidden
    }
+
+   .btn-default {
+    @apply p-2  rounded-md bg-primary drop-shadow-sm hover:scale-110 transition-all
+   }
+
+   .remove {
+    @apply bg-red-500 border-2 border-black
+   }

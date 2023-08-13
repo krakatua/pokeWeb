@@ -30,7 +30,9 @@ const Featured = ({ index }) => {
 
   return (
     <>
-      <motion.div variants={textVariant()}>
+      <motion.div 
+      className="w-auto h-auto"
+      variants={textVariant()}>
         <h2 className={`${styles.sectionHeadText} text-center mb-10`}>
           Start checking out these pokemons
         </h2>
@@ -82,10 +84,11 @@ const Featured = ({ index }) => {
             >
               {pokemons?.slice(0, 10).map((pokemon) => (
                 <SwiperSlide className="flex" key={pokemon?.url}>
-                  <Link to={`/pokemon/${pokemon.name}`}
-                  className="hover:scale-125 transition-all">
+                  <Tilt>
+                  <Link to={`/pokemon/${pokemon.name}`}>
                     <Cardv2 url={pokemon?.url} />
                   </Link>
+                  </Tilt>
                 </SwiperSlide>
               ))}
             </SwiperComponent>

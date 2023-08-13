@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { pokeType } from "../constants";
+import { pokeType, colorVariants } from "../constants";
 import logo from '../assets/025.png';
 
 function Cardv2({ url, totalItem }) {
@@ -19,25 +19,7 @@ function Cardv2({ url, totalItem }) {
     getPokemon();
   }, []);
 
-  const colorVariants = {
-    blue: "bg-blue-600 text-white",
-    red: "bg-red-500",
-    yellow: "bg-yellow-300",
-    green: "bg-green-600",
-    purple: "bg-purple-600",
-    gray: "bg-neutral-900",
-    slate: "bg-slate-500",
-    cerulean: "bg-cerulean-500",
-    pink: "bg-pink-500",
-    orange: "bg-orange-500",
-    brown: "bg-amber-800",
-    lightblue: "bg-blue-300",
-    lightgreen: "bg-green-400",
-    lightpink: "bg-pink-300",
-    lightRed: "bg-light-red-500",
-    goldenrod: "bg-yellow-800",
-    graylight: 'bg-gray-400'
-  };
+  
 
   return (
     <Link to={`/pokemon/${pokemon?.name || totalItem?.name}`}>

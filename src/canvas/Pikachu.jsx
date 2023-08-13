@@ -40,7 +40,7 @@ const PikachuCanvas = () => {
   useEffect(() => {
 
     //Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
+    const mediaQuery = window.matchMedia('(max-width: 200px)');
 
     //Set the initial value of the 'isMobile' state variable
     setIsMobile(mediaQuery.matches);
@@ -53,19 +53,19 @@ const PikachuCanvas = () => {
     mediaQuery.addEventListener('change', handleMediaQueryChange);
     return () => {
       mediaQuery.removeEventListener('change', handleMediaQueryChange);
-
     }
   }, [])
 
   return (
     <Canvas
+    className="max-w-[200px] md:block hidden"
     frameloop='demand'
     shadows
     camera={{position: [20, 3, 5], fov: 25}}
     gl={{preserveDrawingBuffer:true}}>
       <Suspense fallback={<Loader/>}>
     <OrbitControls 
-    
+    autoRotate
     enableZoom={false}
     maxPolarAngle={Math.PI / 2}
     minPolarAngle={Math.PI / 2}/>
@@ -78,3 +78,4 @@ const PikachuCanvas = () => {
 
 export default PikachuCanvas
 
+//248134714

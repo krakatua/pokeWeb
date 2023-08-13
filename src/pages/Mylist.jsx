@@ -1,6 +1,5 @@
 import { signOut } from "firebase/auth";
-import React from "react";
-import { auth, db, firebaseDB, pokemonListRef } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../redux/reducers/userSlice";
 import {
@@ -10,27 +9,22 @@ import {
   openPokemonModal,
 } from "../redux/reducers/modalSlice";
 import { useEffect, useState } from "react";
-import {
-  collection,
-  doc,
-  getDoc,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
 import SectionWrapper from "../hoc/SectionWrapper";
-import { Link } from "react-router-dom";
 import { Modal } from "@mui/material";
-import { pfp } from "../assets";
+import {colorVariants} from '../constants'
+import { pokeType } from "../constants";
+import { fadeIn } from "../utils/motion";
+import { Link } from "react-router-dom";
 
-function Mylist() {
+function Mylist({index}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [pokeList, setPokeList] = useState([]);
   const [modalPoke, setModalPoke] = useState([]);
   const isOpen = useSelector((state) => state.modals.pokemonModalOpen);
+  
 
   async function handleSignOut() {
     await signOut(auth);
@@ -71,22 +65,33 @@ function Mylist() {
 
   const objeto = modalPoke[0];
 
-  
+ async function removeFromList(e) {
+  e.stopPropagation()
+  await deleteDoc(doc(db, "pokemonList", "pokemons", "list", pokeList.id))
+ }
+
+
   return (
     <section className="mt-20 flex flex-wrap gap-10 justify-center">
-      <motion.div className="border w-[200px] h-[500px] rounded-md">
+      <motion.div
+      variants={fadeIn("right", "spring", index * 0.5, 0.75)}
+      className="border w-[200px] h-[500px] rounded-md">
         <div className="flex flex-col items-center gap-5 mt-5">
-          <picture className="border text-center flex justify-center items-center w-[150px] h-[150px] rounded-full">
-            <img className="w-[100px]" src={`${user?.photoUrl}`} />
+          <picture className="border-2 border-gray-400 text-center flex justify-center items-center w-[150px] h-[150px] rounded-full">
+            <img className="w-full rounded-full" src={`${user?.photoUrl}`} />
           </picture>
           <h1>{user?.name}</h1>
           <br />
           <h1>Amount of pokemons: {pokeList.length}</h1>
           <select className="w-full"></select>
-          <button onClick={handleSignOut}>Sign Out</button>
+          <button 
+          className="btn-default remove"
+          onClick={handleSignOut}>Sign Out</button>
         </div>
       </motion.div>
-      <motion.div className="border w-[500px] h-[500px]">
+      <motion.div 
+      variants={fadeIn("left", "spring", index * 0.5, 0.75)}
+      className="border w-[500px] h-[500px]">
         <div className="flex flex-wrap gap-5 p-3">
           <ul className="flex flex-wrap gap-5 items-center">
             {pokeList.map((poke) => (
@@ -109,22 +114,45 @@ function Mylist() {
         onClose={() => dispatch(closePokemonModal())}
         className="flex justify-center items-center"
       >
-        <div className="bg-[#333638] rounded-md h-[400px]">
+        <div className="bg-[#333638] rounded-md h-[400px] flex flex-col justify-around
+        items-center">
           <picture>
             <img
               className="w-[250px]"
               src={`${objeto?.pokemon?.pictures?.other?.home?.front_default}`}
             />
           </picture>
-          <div>
+          <div className="flex justify-center items-center gap-2">
             <label>{objeto?.pokemon?.name}</label>
-            {objeto?.pokemon?.types?.map((el, slot) => (
-              <label key={slot}>{el?.type?.name}</label>
-            ))}
+            <div className="flex gap-1">
+
+            {objeto?.pokemon.types.map(({ type, slot }) => {
+              const typeColor = pokeType.find(
+                (item) => item.name === type.name
+              )?.color;
+              
+              return (
+                <h4
+                  id="pokeType"
+                  className={`${colorVariants[typeColor]} p-1 m-1 rounded-md text-[16px]`}
+                  key={slot}
+                  >
+                  {type?.name}
+                </h4>
+              );
+            })}
+            </div>
           </div>
-          <div>
-            <button>Details</button>
-            <button>Remove</button>
+          <div className="flex flex-wrap justify-center gap-10">
+            <button className="btn-default">
+              <Link to={`/pokemon/${objeto?.pokemon?.name}`}>
+              Details
+              
+              </Link>
+              </button>
+            <button
+            onClick={removeFromList}
+            className="btn-default remove">Remove</button>
           </div>
         </div>
       </Modal>

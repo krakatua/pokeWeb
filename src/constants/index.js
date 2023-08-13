@@ -54,6 +54,26 @@ export const pokeType = [
   { name: 'fairy', color: 'lightpink' },
 ];
 
+export const colorVariants = {
+  blue: "bg-blue-600 text-white",
+  red: "bg-red-500",
+  yellow: "bg-yellow-300",
+  green: "bg-green-600",
+  purple: "bg-purple-600",
+  gray: "bg-neutral-900",
+  slate: "bg-slate-500",
+  cerulean: "bg-cerulean-500",
+  pink: "bg-pink-500",
+  orange: "bg-orange-500",
+  brown: "bg-amber-800",
+  lightblue: "bg-blue-300",
+  lightgreen: "bg-green-400",
+  lightpink: "bg-pink-300",
+  lightRed: "bg-light-red-500",
+  goldenrod: "bg-yellow-800",
+  graylight: 'bg-gray-400'
+};
+
 
 export const nameStat = [
   "HP",

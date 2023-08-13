@@ -3,7 +3,7 @@ import { styles } from "../constants"
 
 const Header = () => {
   return (
-    <section className="relative w-full h-screen mx-auto">
+    <section className="relative w-full h-[50vh] mx-auto">
         
         <div className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto
         flex flex-row items-start gap-5`}>
@@ -12,15 +12,15 @@ const Header = () => {
                 <div className="w-1 sm:h-80 h-40 yellow-gradient"/>
 
             </div>
-            <div >
-                <h1 className={`${styles.heroHeadText}`}>
+            <div className="sm:flex items-center justify-center">
+                <h1 className={`${styles.sectionHeadText}`}>
                     Welcome to the Greatest Poke Wiki <br /><span className={`${styles.heroSubText}`}> Say hi! to pikachu</span>
                 </h1>
-
+                <PikachuCanvas/>
             </div>
 
         </div>
-        <PikachuCanvas/>
+        
     </section>
   )
 }

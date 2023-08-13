@@ -1,24 +1,18 @@
-
-import { Modal } from "@mui/material"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
-
-import { closeSignupModal, openSignupModal } from "../../redux/reducers/modalSlice"
-import { auth } from "../../../firebase"
-import { setUser } from "../../redux/reducers/userSlice"
-import { useNavigate } from "react-router"
-import { object } from "prop-types"
-import { pfp } from "../../assets"
+import { Modal } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { closeSignupModal, openSignupModal } from "../../redux/reducers/modalSlice";
+import { auth } from "../../../firebase";
+import { setUser } from "../../redux/reducers/userSlice";
+import { pfp } from "../../assets";
 
 
 export default function SignupModal() {
-    const isOpen = useSelector(state => state.modals.signupModalOpen)
-    const dispatch = useDispatch()
-
-
-    const [email, setEmail] = useState("")
-    const [name, setName] = useState()
+    const isOpen = useSelector(state => state.modals.signupModalOpen);
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState();
     const [password, setPassword] = useState("");
     const [imgRandom, setImgRandom] = useState(null);
 
@@ -27,8 +21,6 @@ export default function SignupModal() {
     const propsRandom =
       propiedades[Math.floor(Math.random() * propiedades.length)];
     setImgRandom(pfp[0][propsRandom]);
-
-    
   }
   useEffect(() => {
     getImg()
