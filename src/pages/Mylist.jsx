@@ -17,11 +17,15 @@ import {colorVariants} from '../constants'
 import { pokeType } from "../constants";
 import { fadeIn } from "../utils/motion";
 import { Link } from "react-router-dom";
+import Testing from "../components/Testing";
 
 function Mylist({index}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [pokeList, setPokeList] = useState([]);
+  const [pokeList, setPokeList] = useState([{
+    docuId: '',
+    pokeData: {}
+  }]);
   const [modalPoke, setModalPoke] = useState([]);
   const isOpen = useSelector((state) => state.modals.pokemonModalOpen);
   
@@ -41,7 +45,10 @@ function Mylist({index}) {
     return onSnapshot(q, (snapshot) => {
       const pokeList = [];
       snapshot.forEach((doc) => {
-        pokeList.push(doc.data());
+        pokeList.push({
+          docuId: doc.id,
+          pokeData: doc.data(),
+        });
       });
 
       setPokeList(pokeList);
@@ -53,26 +60,29 @@ function Mylist({index}) {
   }, [user]);
 
   const getModal = (ele) => {
-    let modalData = [];
-    for (let i = 0; i < pokeList.length; i++) {
-      if (ele === pokeList[i].uid) {
-        modalData.push(pokeList[i]);
+    let modalData = []
+    for (let i = 0; i < pokeList?.length; i++) {
+      if (ele === pokeList[i].pokeData.pokemon.id) {
+        modalData.push(pokeList[i])
       }
-      setModalPoke(modalData);
+      setModalPoke(modalData)
     }
     dispatch(openPokemonModal());
+    
   };
 
-  const objeto = modalPoke[0];
 
- async function removeFromList(e) {
-  e.stopPropagation()
-  await deleteDoc(doc(db, "pokemonList", "pokemons", "list", pokeList.id))
+  const objeto = modalPoke[0]
+
+
+ async function removeFromList(ele) {
+  await deleteDoc(doc(db, "pokemonList", "pokemons", "list", ele))
+  dispatch(closePokemonModal());
  }
 
 
   return (
-    <section className="mt-20 flex flex-wrap gap-10 justify-center">
+    <section className="mt-20 flex flex-wrap gap-10 justify-center sm:h-[100vh]">
       <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
       className="border w-[200px] h-[500px] rounded-md">
@@ -82,7 +92,7 @@ function Mylist({index}) {
           </picture>
           <h1>{user?.name}</h1>
           <br />
-          <h1>Amount of pokemons: {pokeList.length}</h1>
+          <h1>Amount of pokemons: {pokeList?.length}</h1>
           <select className="w-full"></select>
           <button 
           className="btn-default remove"
@@ -94,18 +104,21 @@ function Mylist({index}) {
       className="border w-[500px] h-[500px]">
         <div className="flex flex-wrap gap-5 p-3">
           <ul className="flex flex-wrap gap-5 items-center">
-            {pokeList.map((poke) => (
-              <li key={poke.id} className="shadow-inner">
-                <button onClick={() => getModal(poke.uid)}>
+            {
+              pokeList.map(objeto => objeto.pokeData.pokemon).map((poke) => (
+                <li key={poke?.id} className="shadow-inner">
+                <button onClick={() => getModal(poke?.id)}>
                   <picture className="w-[50px]">
                     <img
                       className="w-[50px] bg-[#333638] border-2 border-[#1E1E1E] rounded-sm p-1"
-                      src={`${poke.pokemon.pictures.other.home.front_default}`}
+                      src={`${poke?.pictures?.other?.home?.front_default}`}
                     />
                   </picture>
                 </button>
               </li>
-            ))}
+              ))
+            }
+            
           </ul>
         </div>
       </motion.div>
@@ -119,14 +132,13 @@ function Mylist({index}) {
           <picture>
             <img
               className="w-[250px]"
-              src={`${objeto?.pokemon?.pictures?.other?.home?.front_default}`}
+              src={`${objeto?.pokeData?.pokemon?.pictures?.other?.home?.front_default}`}
             />
           </picture>
           <div className="flex justify-center items-center gap-2">
-            <label>{objeto?.pokemon?.name}</label>
+            <label>{objeto?.pokeData?.pokemon?.name}</label>
             <div className="flex gap-1">
-
-            {objeto?.pokemon.types.map(({ type, slot }) => {
+            {objeto?.pokeData?.pokemon?.types?.map(({ type, slot }) => {
               const typeColor = pokeType.find(
                 (item) => item.name === type.name
               )?.color;
@@ -145,17 +157,18 @@ function Mylist({index}) {
           </div>
           <div className="flex flex-wrap justify-center gap-10">
             <button className="btn-default">
-              <Link to={`/pokemon/${objeto?.pokemon?.name}`}>
+              <Link to={`/pokemon/${objeto?.pokeData?.pokemon?.name}`}>
               Details
               
               </Link>
               </button>
             <button
-            onClick={removeFromList}
+            onClick={() => removeFromList(objeto?.docuId)}
             className="btn-default remove">Remove</button>
           </div>
         </div>
       </Modal>
+      <Testing/>
     </section>
   );
 }
