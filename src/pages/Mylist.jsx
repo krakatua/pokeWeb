@@ -168,7 +168,6 @@ function Mylist({index}) {
           </div>
         </div>
       </Modal>
-      <Testing/>
     </section>
   );
 }

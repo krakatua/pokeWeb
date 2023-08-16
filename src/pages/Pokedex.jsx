@@ -22,7 +22,7 @@ const Pokedex = ({index}) =>  {
     setVisible((preVal) => preVal + 8);
   };
   const handleInputChange = (event) => {
-    setSearchPoke(event.target.value);
+    setSearchPoke(event.target.value.toLowerCase());
   };
   const data = useSelector((state) => {
    return state.app
