@@ -84,10 +84,7 @@ export default function SignupModal() {
         border border-gray-700 rounded-lg
         flex justify-center">
                     <div className="w-[90%] mt-8 flex flex-col">
-                        <button
-                        onClick={handleGuestSignIn}
-                        className="bg-white text-black w-full
-                font-bold text-lg p-2 rounded-md">Sign In as Guest</button>
+                    
                         <h1 className="text-center mt-4 font-bold text-lg
                 ">or</h1>
                         <h1 className="mt-4 font-bold text-4xl
