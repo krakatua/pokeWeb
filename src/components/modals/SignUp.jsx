@@ -1,7 +1,7 @@
 import { Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { closeSignupModal, openSignupModal } from "../../redux/reducers/modalSlice";
 import { auth } from "../../../firebase";
 import { setUser } from "../../redux/reducers/userSlice";
@@ -39,9 +39,6 @@ export default function SignupModal() {
         });
     }
 
-    async function handleGuestSignIn() {
-        await signInWithEmailAndPassword(auth, "guest77@gmail.com", "guest771234")
-    }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

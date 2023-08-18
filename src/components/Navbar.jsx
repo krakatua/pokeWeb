@@ -4,8 +4,6 @@ import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
 import { useState } from "react";
-import LoginModal from "./modals/LoginModal";
-import SignupModal from "./modals/SignUp";
 
 const Navbar = () => {
 

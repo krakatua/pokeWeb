@@ -17,7 +17,6 @@ import {colorVariants} from '../constants'
 import { pokeType } from "../constants";
 import { fadeIn } from "../utils/motion";
 import { Link } from "react-router-dom";
-import Testing from "../components/Testing";
 
 function Mylist({index}) {
   const dispatch = useDispatch();
