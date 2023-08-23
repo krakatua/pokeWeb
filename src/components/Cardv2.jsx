@@ -24,7 +24,7 @@ function Cardv2({ url, totalItem }) {
   return (
     <Link to={`/pokemon/${pokemon?.name || totalItem?.name}`}>
       {url ? (
-        <div className="CardPoke border rounded-tl-lg">
+        <div className="CardPoke border border-gray-800 rounded-tl-lg">
          
             <img
               src={pokemon?.sprites?.other.home.front_default || logo}
