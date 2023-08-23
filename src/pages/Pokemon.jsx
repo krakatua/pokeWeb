@@ -12,6 +12,7 @@ import { addDoc } from "firebase/firestore";
 import { pokemonListRef } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { openLoginModal } from "../redux/reducers/modalSlice";
+import { Toaster, toast } from "sonner";
 
 function Pokemon() {
   const { id } = useParams();
@@ -68,11 +69,13 @@ function Pokemon() {
       },
       email: user.email,
     });
+    toast(`${poke?.name} was added to your list!`)
   }
 
   return (
     <section className="relative w-full h-auto mx-auto">
       <motion.div className="mt-10">
+        <Toaster/>
         <div
           className={`${styles.padding} bg-tertiary w-full relative h-fit rounded-lg`}
         >

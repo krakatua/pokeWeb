@@ -17,6 +17,7 @@ import {colorVariants} from '../constants'
 import { pokeType } from "../constants";
 import { fadeIn } from "../utils/motion";
 import { Link } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 function Mylist({index}) {
   const dispatch = useDispatch();
@@ -77,11 +78,13 @@ function Mylist({index}) {
  async function removeFromList(ele) {
   await deleteDoc(doc(db, "pokemonList", "pokemons", "list", ele))
   dispatch(closePokemonModal());
+  toast(`${objeto?.pokeData?.pokemon?.name} was removed from your list!`)
  }
 
 
   return (
     <section className="mt-20 flex flex-wrap gap-10 justify-center sm:h-[100vh]">
+      <Toaster/>
       <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
       className="border w-[200px] h-[500px] rounded-md">
@@ -92,7 +95,6 @@ function Mylist({index}) {
           <h1>{user?.name}</h1>
           <br />
           <h1>Amount of pokemons: {pokeList?.length}</h1>
-          <select className="w-full"></select>
           <button 
           className="btn-default remove"
           onClick={handleSignOut}>Sign Out</button>
