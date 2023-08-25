@@ -11,12 +11,14 @@ import {  useDispatch, useSelector } from "react-redux";
 import { getInitialPokemonData } from "../redux/reducers/getInitialPokemonData";
 import { fadeIn } from "../utils/motion";
 import {GrPowerReset} from 'react-icons/gr'
+import SkeletonCard from "../components/UI/SkeletonCard";
 
 const Pokedex = ({index}) =>  {
   const [listPokes, setListPokes] = useState([]);
   const [searchPoke, setSearchPoke] = useState("");
   const [visible, setVisible] = useState(12);
   const [totalItem, setTotalItem] = useState(0);
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
 
   const showMoreItems = () => {
@@ -29,11 +31,12 @@ const Pokedex = ({index}) =>  {
    return state.app
   })
   async function handleSearch() {
+    setLoading(true)
     const { data } = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${searchPoke}`
     );
     setTotalItem(data);
-
+    setLoading(false);
    
   }
   const handleKeyPress = (event) => {
@@ -49,6 +52,7 @@ const Pokedex = ({index}) =>  {
 
 
   const getList = () => {
+    setLoading(false);
     return setListPokes(data?.pokeList)
   }
 
@@ -79,7 +83,7 @@ const Pokedex = ({index}) =>  {
   }
 
   return (
-    <section className="relative w-full mx-auto h-screen">
+    <section className="relative w-full mx-auto h-full mb-12">
       <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}>
         <div
@@ -129,6 +133,7 @@ const Pokedex = ({index}) =>  {
               </div>
               <div className="flex flex-wrap justify-center items-center gap-2 p-2 mb-10 mt-10">
                 {totalItem ? (
+                  
                   <Tilt className="xs:w-[350px]">
                     <Cardv2 totalItem={totalItem} />
                   </Tilt>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { pokeType, colorVariants } from "../constants";
 import logo from '../assets/025.png';
+import SkeletonCard from "./UI/SkeletonCard";
 
 function Cardv2({ url, totalItem }) {
   const [pokemon, setPokemon] = useState(null);
@@ -78,6 +79,7 @@ function Cardv2({ url, totalItem }) {
           </span>
         </div>
       )}
+      {!url && !totalItem && <SkeletonCard/> }
     </Link>
   );
 }

@@ -77,13 +77,11 @@ export default function SignupModal() {
                 onClose={() => dispatch(closeSignupModal())}
                 className="flex justify-center items-center"
             >
-                <div className="w-[90%] h-[500px] bg-black text-white md:w-[560px] md:h-[600px]
+                <div className="w-[90%] h-[450px] bg-black 
+                text-white md:w-[560px] md:h-[450px]
         border border-gray-700 rounded-lg
         flex justify-center">
                     <div className="w-[90%] mt-8 flex flex-col">
-                    
-                        <h1 className="text-center mt-4 font-bold text-lg
-                ">or</h1>
                         <h1 className="mt-4 font-bold text-4xl
                 ">Create your Account</h1>
                         <input

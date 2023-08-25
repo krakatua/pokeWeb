@@ -6,7 +6,19 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      keyframes: {
+        shimmer: {
+          '100%' : {transform: 'translateX(100%)'}
+        }
+      }
+      
+    },
   },
   plugins: [
     // eslint-disable-next-line no-undef

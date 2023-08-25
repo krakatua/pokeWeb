@@ -35,6 +35,7 @@ function Mylist({index}) {
     dispatch(signOutUser);
     dispatch(closeSignupModal());
     dispatch(closeLoginModal());
+    window.location.reload()
   }
 
   function getData() {
