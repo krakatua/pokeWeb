@@ -22,6 +22,7 @@ function Pokemon() {
   const [pokeType, setPokeType] = useState([]);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  console.log(user)
 
   async function getPokeData() {
     const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -54,7 +55,7 @@ function Pokemon() {
   }, [poke]);
 
   async function addPokeList() {
-    if (!user) {
+    if (!user.username) {
       dispatch(openLoginModal());
       return;
     }

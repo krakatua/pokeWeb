@@ -40,7 +40,7 @@ const Featured = ({ index }) => {
       <motion.div
         variants={fadeIn("right", "spring", index * 0.5, 0.75)}
         className={`${styles.paddingX} m-auto p-[1px] rounded-[20px]
-        flex flex-col items-center`}
+        flex flex-col items-center mb-20`}
       >
         <div className="container">
           <div className="swiperContainer">

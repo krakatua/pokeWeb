@@ -34,7 +34,7 @@ export default function LoginModal() {
                 onClose={() => dispatch(closeLoginModal())}
                 className="flex justify-center items-center"
             >
-                <div className="w-[90%] h-[500px] bg-black text-white md:w-[560px] md:h-[600px]
+                <div className="w-[90%] h-[400px] bg-black text-white md:w-[560px]
         border border-gray-700 rounded-lg
         flex justify-center">
                     <div className="w-[90%] mt-8 flex flex-col">

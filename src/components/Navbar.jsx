@@ -4,12 +4,23 @@ import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { openLoginModal } from "../redux/reducers/modalSlice";
 
 const Navbar = () => {
 
     const [active, setActive] = useState('')
     const [toggle, setToggle] = useState(false);
+    const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const linkActive = 'cursor';
 
+    function checkUser() {
+    if (!user.username) {
+      dispatch(openLoginModal());
+      return;
+    }
+}
 
   return (
     <nav
@@ -47,6 +58,7 @@ const Navbar = () => {
                     </li>
                     <li className={`hover:text-white transition-all hover:scale-110 text-[18px] font-medium cursor-pointer`}>
                       <Link
+                      onClick={() => checkUser()}
                       to='/MyList'>
                       My List
                         </Link>
