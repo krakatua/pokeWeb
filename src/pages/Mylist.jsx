@@ -90,8 +90,10 @@ function Mylist({index}) {
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
       className="border w-[200px] h-[500px] rounded-md">
         <div className="flex flex-col items-center gap-5 mt-5">
-          <picture className="border-2 border-gray-400 text-center flex justify-center items-center w-[150px] h-[150px] rounded-full">
-            <img className="w-full rounded-full" src={`${user?.photoUrl}`} />
+          <picture className="border-2 border-gray-400 
+          text-center flex justify-center items-center 
+          w-[150px] h-[150px] rounded-full">
+            <img className="w-full h-full object-contain rounded-full " src={`${user?.photoUrl}`} />
           </picture>
           <h1>{user?.name}</h1>
           <br />
