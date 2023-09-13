@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { motion } from "framer-motion";
 import CenterCanvas from "../canvas/Center";
 import SectionWrapper from "../hoc/SectionWrapper";
@@ -7,18 +9,17 @@ import axios from "axios";
 import Cardv2 from "../components/Cardv2";
 import { Tilt } from "react-tilt";
 import has from "lodash";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getInitialPokemonData } from "../redux/reducers/getInitialPokemonData";
 import { fadeIn } from "../utils/motion";
-import {GrPowerReset} from 'react-icons/gr'
-import SkeletonCard from "../components/UI/SkeletonCard";
+import { GrPowerReset } from "react-icons/gr";
 
-const Pokedex = ({index}) =>  {
+// eslint-disable-next-line react-refresh/only-export-components
+const Pokedex = ({ index }) => {
   const [listPokes, setListPokes] = useState([]);
   const [searchPoke, setSearchPoke] = useState("");
   const [visible, setVisible] = useState(12);
   const [totalItem, setTotalItem] = useState(0);
-  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
 
   const showMoreItems = () => {
@@ -28,16 +29,13 @@ const Pokedex = ({index}) =>  {
     setSearchPoke(event.target.value.toLowerCase());
   };
   const data = useSelector((state) => {
-   return state.app
-  })
+    return state.app;
+  });
   async function handleSearch() {
-    setLoading(true)
     const { data } = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${searchPoke}`
     );
     setTotalItem(data);
-    setLoading(false);
-   
   }
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -47,54 +45,52 @@ const Pokedex = ({index}) =>  {
 
   const resetList = () => {
     setTotalItem(0);
-    setSearchPoke("")
-  }
-
+    setSearchPoke("");
+  };
 
   const getList = () => {
-    setLoading(false);
-    return setListPokes(data?.pokeList)
-  }
-
-
+    return setListPokes(data?.pokeList);
+  };
 
   useEffect(() => {
     dispatch(getInitialPokemonData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect (() => {
+  useEffect(() => {
     getList();
-  }, [data])
-
-  
-
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   async function filteredItems(filter) {
-    
-
     if (filter === "highestNum") {
-      let newArrPoke = has.orderBy(data.pokeList, ["name", "url"], ["desc", "asc"]);
+      let newArrPoke = has.orderBy(
+        data.pokeList,
+        ["name", "url"],
+        ["desc", "asc"]
+      );
       setListPokes(newArrPoke);
     } else if (filter === "lowestNum") {
-      let newArrPoke = has.orderBy(data.pokeList, ["name", "url"], ["asc", "desc"]);
+      let newArrPoke = has.orderBy(
+        data.pokeList,
+        ["name", "url"],
+        ["asc", "desc"]
+      );
       setListPokes(newArrPoke);
     }
   }
 
   return (
     <section className="relative w-full mx-auto h-full mb-12">
-      <motion.div
-      variants={fadeIn("right", "spring", index * 0.5, 0.75)}>
+      <motion.div variants={fadeIn("right", "spring", index * 0.5, 0.75)}>
         <div
           className={`${styles.padding} bg-tertiary w-full relative h-fit rounded-lg`}
         >
           <div className="sm:flex items-center justify-center">
-                    <h2 className={`${styles.sectionSubText} text-center`}>
-            Start Looking for your pokemon!
-          </h2>
-          <CenterCanvas/>
-
+            <h2 className={`${styles.sectionSubText} text-center`}>
+              Start Looking for your pokemon!
+            </h2>
+            <CenterCanvas />
           </div>
           <div className={``}>
             <div className="flex flex-col items-center">
@@ -113,10 +109,14 @@ const Pokedex = ({index}) =>  {
                       Ex: pikachu or 2
                     </label>
                   </div>
-                    <buutton onClick={resetList}
-                    className='p-2 rounded-md bg-white
+                  <buutton
+                    onClick={resetList}
+                    className="p-2 rounded-md bg-white
                      hover:scale-105
-                    transition-all cursor-pointer'><GrPowerReset/></buutton>
+                    transition-all cursor-pointer"
+                  >
+                    <GrPowerReset />
+                  </buutton>
                 </div>
                 <select
                   id="orderSelect"
@@ -127,25 +127,22 @@ const Pokedex = ({index}) =>  {
                   <option value="" disabled>
                     Default
                   </option>
-                  <option value="lowestNum">A - Z</option>
-                  <option value="highestNum">Z - A</option>
+                  <option value="lowestNum">A - Z ⬇</option>
+                  <option value="highestNum">Z - A ⬆</option>
                 </select>
               </div>
               <div className="flex flex-wrap justify-center items-center gap-2 p-2 mb-10 mt-10">
                 {totalItem ? (
-                  
                   <Tilt className="xs:w-[350px]">
                     <Cardv2 totalItem={totalItem} />
                   </Tilt>
                 ) : (
-                  
                   listPokes?.slice(0, visible).map((pokemon) => (
                     <Tilt key={pokemon.name} className="xs:w-[350px]">
                       <Cardv2 url={pokemon?.url} />
                     </Tilt>
                   ))
                 )}
-                
               </div>
 
               <button
@@ -162,4 +159,5 @@ const Pokedex = ({index}) =>  {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default SectionWrapper(Pokedex, "");

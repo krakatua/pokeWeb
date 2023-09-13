@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openLoginModal } from "../redux/reducers/modalSlice";
 import { Toaster, toast } from "sonner";
 
+// eslint-disable-next-line react-refresh/only-export-components
 function Pokemon() {
   const { id } = useParams();
   const [poke, setPoke] = useState({});
@@ -22,7 +23,7 @@ function Pokemon() {
   const [pokeType, setPokeType] = useState([]);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(user)
+  console.log(user);
 
   async function getPokeData() {
     const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -42,6 +43,8 @@ function Pokemon() {
       await getPokeData();
     }
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   useEffect(() => {
     // Cuando cambia 'poke', actualizamos 'pokestats' con las estadísticas
@@ -70,23 +73,30 @@ function Pokemon() {
       },
       email: user.email,
     });
-    toast(`${poke?.name} was added to your list!`)
+    toast(`${poke?.name} was added to your list!`);
   }
 
   return (
     <section className="relative w-full h-auto mx-auto">
       <motion.div className="mt-10">
-        <Toaster/>
+        <Toaster />
         <div
           className={`${styles.padding} bg-tertiary w-full relative h-fit rounded-lg`}
         >
-          <h1 className="w-full text-center text-[24px] uppercase">
-            {poke?.name}{" "}
-            <span className="text-[16px] text-gray-400">#{poke?.id}</span>
-          </h1>
-          <div className="w-[100%] flex flex-wrap gap-5">
-            <div className="w-full flex flex-col items-center">
-              <div>
+          <div className="flex justify-center items-center gap-10">
+            <div className="flex items-center gap-2">
+              <h1 className="w-fit text-center text-[24px] uppercase">
+                {poke?.name}{" "}
+              </h1>
+              <span className="text-[16px] text-gray-400">#{poke?.id}</span>
+            </div>
+            <button onClick={addPokeList} className="border p-2 rounded-lg">
+              Add
+            </button>
+          </div>
+          <div className="w-[100%] flex flex-col gap-5">
+            <div className="w-full flex flex-wrap justify-center items-end">
+              <div className="md:w-[50%]">
                 <Tilt>
                   <img
                     src={poke?.sprites?.other?.home?.front_default}
@@ -96,27 +106,25 @@ function Pokemon() {
                 </Tilt>
               </div>
 
-              <div className="w-full ">
-                <div className={`w-full max-h-[300px] p-2 ${styles.padding}`}>
+              <div className="md:w-[50%]">
+                <div className={` max-h-[300px] p-2 ${styles.padding}`}>
                   <h1 className={`${styles.sectionSubText}`}>Stats</h1>
                   <LinesChart pokestats={pokestats} pokemon={poke?.name} />
                 </div>
               </div>
             </div>
-            <div className="w-full h-[650px]">
-              <div className="">
-                <h2 className={`${styles.sectionSubText}`}>Details</h2>
-                <button onClick={addPokeList} className="border p-2">
-                  Add to your list
-                </button>
+            <div className="w-full h-fit mt-10">
+              <h2 className={`${styles.sectionSubText} text-center`}>
+                Details
+              </h2>
+              <PokeEvolve id={species} />
+              <div className="flex flex-wrap justify-center items-center gap-5 mb-10 mt-20">
                 <div
-                  className={`${styles.padding} flex gap-2  bg-primary w-full p-1`}
+                  className={`${styles.padding} flex gap-2  bg-primary w-fit p-1 rounded-lg `}
                 >
-                  <div className="w-full">
+                  <div className="w-fit">
                     <p>Height: {poke?.height}</p>
                     <p>Weight: {poke?.weight}</p>
-                  </div>
-                  <div className="w-full">
                     <p>Base experience: {poke?.base_experience}</p>
                     <p>
                       Abilities:{" "}
@@ -126,23 +134,26 @@ function Pokemon() {
                     </p>
                   </div>
                 </div>
-              </div>
-              <PokeEvolve id={species} />
-              <div className="flex gap-5">
-                {pokeType.map((ele) => (
-                  <div key={ele.id}>
-                    <picture>
-                      <img className="w-[50px]" src={ele.image} slot={ele.id} />
-                      <label htmlFor="">{ele.id}</label>
-                    </picture>
-                    <ul>
-                      <li>Resistence: {ele.resistance.join(", ")}</li>
-                      <li>Strength: {ele.strength.join(", ")} </li>
-                      <li>Vulnerable: {ele.vulnerable.join(", ")}</li>
-                      <li>Weakness: {ele.weakness.join(", ")}</li>
-                    </ul>
-                  </div>
-                ))}
+                <div className="flex flex-wrap gap-5">
+                  {pokeType.map((ele) => (
+                    <div key={ele.id}>
+                      <picture className="flex sm:justify-start justify-center items-center gap-1">
+                        <img
+                          className="w-[50px]"
+                          src={ele.image}
+                          slot={ele.id}
+                        />
+                        <label htmlFor="">{ele.id}</label>
+                      </picture>
+                      <ul>
+                        <li>Resistence: {ele.resistance.join(", ")}</li>
+                        <li>Strength: {ele.strength.join(", ")} </li>
+                        <li>Vulnerable: {ele.vulnerable.join(", ")}</li>
+                        <li>Weakness: {ele.weakness.join(", ")}</li>
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -152,4 +163,5 @@ function Pokemon() {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default SectionWrapper(Pokemon, "");

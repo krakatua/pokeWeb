@@ -30,9 +30,7 @@ const Featured = ({ index }) => {
 
   return (
     <>
-      <motion.div 
-      className="w-auto h-auto"
-      variants={textVariant()}>
+      <motion.div className="w-auto h-auto" variants={textVariant()}>
         <h2 className={`${styles.sectionHeadText} text-center mb-10`}>
           Start checking out these pokemons
         </h2>
@@ -61,7 +59,7 @@ const Featured = ({ index }) => {
                   spaceBetween: 25,
                 },
                 "@0.50": {
-                  slidesPerView: 1.25,
+                  slidesPerView: 1,
                   spaceBetween: 25,
                 },
                 "@1.00": {
@@ -69,7 +67,7 @@ const Featured = ({ index }) => {
                   spaceBetween: 25,
                 },
                 "@1.25": {
-                  slidesPerView: 2.5,
+                  slidesPerView: 2,
                   spaceBetween: 20,
                 },
                 "@1.50": {
@@ -78,16 +76,16 @@ const Featured = ({ index }) => {
                 },
                 "@1.75": {
                   slidesPerView: 4,
-                  spaceBetween: 20,
+                  spaceBetween: 30,
                 },
               }}
             >
               {pokemons?.slice(0, 10).map((pokemon) => (
                 <SwiperSlide className="flex" key={pokemon?.url}>
                   <Tilt>
-                  <Link to={`/pokemon/${pokemon.name}`}>
-                    <Cardv2 url={pokemon?.url} />
-                  </Link>
+                    <Link to={`/pokemon/${pokemon.name}`}>
+                      <Cardv2 url={pokemon?.url} />
+                    </Link>
                   </Tilt>
                 </SwiperSlide>
               ))}
