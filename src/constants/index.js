@@ -2,20 +2,18 @@ export const pokemonAPI = "https://pokeapi.co/api/v2";
 export const pokemonsRoute = `${pokemonAPI}/pokemon?limit=5000`;
 export const pokemonRoute = `${pokemonAPI}/pokemon`;
 export const pokemonSpeciesRoute = `${pokemonAPI}/pokemon-species`;
-export const pokemonsEvoChain = `${pokemonAPI}/evolution-chain`
-
+export const pokemonsEvoChain = `${pokemonAPI}/evolution-chain`;
 
 export const navLinks = [
   {
-    id: "home",
-    title: "Home",
-  },
-  {
-    id: "pokedex",
+    id: "Pokedex",
     title: "Pokedex",
   },
+  {
+    id: "Mylist",
+    title: "My list",
+  },
 ];
-
 
 const styles = {
   paddingX: "sm:px-16 px-6",
@@ -34,24 +32,24 @@ const styles = {
 };
 
 export const pokeType = [
-  { name: 'normal', color: 'graylight' },
-  { name: 'fighting', color: 'orange' },
-  { name: 'flying', color: 'lightblue' },
-  { name: 'poison', color: 'purple' },
-  { name: 'ground', color: 'brown' },
-  { name: 'rock', color: 'goldenrod' },
-  { name: 'bug', color: 'green' },
-  { name: 'ghost', color: 'purple' },
-  { name: 'steel', color: 'slate' },
-  { name: 'fire', color: 'red' },
-  { name: 'water', color: 'blue' },
-  { name: 'grass', color: 'lightgreen' },
-  { name: 'electric', color: 'yellow' },
-  { name: 'psychic', color: 'pink' },
-  { name: 'ice', color: 'cerulean' },
-  { name: 'dragon', color: 'lightRed' },
-  { name: 'dark', color: 'gray' },
-  { name: 'fairy', color: 'lightpink' },
+  { name: "normal", color: "graylight" },
+  { name: "fighting", color: "orange" },
+  { name: "flying", color: "lightblue" },
+  { name: "poison", color: "purple" },
+  { name: "ground", color: "brown" },
+  { name: "rock", color: "goldenrod" },
+  { name: "bug", color: "green" },
+  { name: "ghost", color: "purple" },
+  { name: "steel", color: "slate" },
+  { name: "fire", color: "red" },
+  { name: "water", color: "blue" },
+  { name: "grass", color: "lightgreen" },
+  { name: "electric", color: "yellow" },
+  { name: "psychic", color: "pink" },
+  { name: "ice", color: "cerulean" },
+  { name: "dragon", color: "lightRed" },
+  { name: "dark", color: "gray" },
+  { name: "fairy", color: "lightpink" },
 ];
 
 export const colorVariants = {
@@ -62,18 +60,17 @@ export const colorVariants = {
   purple: "bg-purple-600",
   gray: "bg-neutral-900",
   slate: "bg-slate-500",
-  cerulean: "bg-cerulean-500",
+  cerulean: "bg-sky-300",
   pink: "bg-pink-500",
   orange: "bg-orange-500",
   brown: "bg-amber-800",
   lightblue: "bg-blue-300",
   lightgreen: "bg-green-400",
   lightpink: "bg-pink-300",
-  lightRed: "bg-light-red-500",
+  lightRed: "bg-cyan-500",
   goldenrod: "bg-yellow-800",
-  graylight: 'bg-gray-400'
+  graylight: "bg-gray-400",
 };
-
 
 export const nameStat = [
   "HP",
@@ -82,14 +79,7 @@ export const nameStat = [
   "Special Attack",
   "Special Defense",
   "Speed",
-]
-
-
-
-
-
-
-
+];
 
 export const pokemon = new Array(
   "Bulbasaur",
