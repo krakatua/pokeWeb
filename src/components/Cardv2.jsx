@@ -1,37 +1,34 @@
 /* eslint-disable react/prop-types */
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { pokeType, colorVariants } from "../constants";
-import logo from '../assets/025.png';
+import logo from "../assets/025.png";
 import SkeletonCard from "./UI/SkeletonCard";
 
 function Cardv2({ url, totalItem }) {
   const [pokemon, setPokemon] = useState(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const getPokemon = async () => {
     await axios
       .get(url)
       .then(({ data }) => setPokemon(data))
       .catch((error) => console.error(error));
-      setLoading(false)
+    setLoading(false);
   };
   useEffect(() => {
     getPokemon();
   }, []);
 
-  
-
   return (
     <Link to={`/pokemon/${pokemon?.name || totalItem?.name}`}>
-      {url ? (
+      {url && (
         <div className="CardPoke border border-gray-800 rounded-tl-lg">
-         
-            <img
-              src={pokemon?.sprites?.other.home.front_default || logo}
-              alt={pokemon?.name}
-            />
-          
+          <img
+            src={pokemon?.sprites?.other.home.front_default || logo}
+            alt={pokemon?.name}
+          />
+
           <h3 className={`text-gray-400 text-[12px] ml-1`}>#{pokemon?.id}</h3>
           <span className="m-1">{pokemon?.name}</span>
           <span className="text-[10px] flex gap-2 ">
@@ -52,7 +49,9 @@ function Cardv2({ url, totalItem }) {
             })}
           </span>
         </div>
-      ) : (
+      )}
+
+      {totalItem && (
         <div className="CardPoke border rounded-tl-lg">
           <img
             src={totalItem?.sprites?.other.home.front_default}
@@ -79,7 +78,7 @@ function Cardv2({ url, totalItem }) {
           </span>
         </div>
       )}
-      {!url && !totalItem && <SkeletonCard/> }
+      {loading && <SkeletonCard />}
     </Link>
   );
 }
