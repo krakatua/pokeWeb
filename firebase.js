@@ -29,5 +29,4 @@ export const pokemonListRef = collection(
   "pokemons",
   "list"
 );
-export const userRegisterRef = collection(firebaseDB, 
-  "userData", "data");
+

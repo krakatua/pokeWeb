@@ -63,12 +63,6 @@ export default function SignupModal() {
       //handle redux actions
     });
 
-    useEffect(() => {
-
-        
-
-    }, [user])
-
 
     return unsubscribe;
   }, []);
